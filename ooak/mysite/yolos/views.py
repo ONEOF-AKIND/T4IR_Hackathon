@@ -53,6 +53,7 @@ def goflow(request):
     tfnet = TFNet(options)
     print('===')
     path = os.path.join(settings.BASE_DIR, settings.MEDIA_ROOT, img.image.name)
+    print(path)
     # print(path)
     imgcv = cv2.imread(path)
     # print(imgcv)

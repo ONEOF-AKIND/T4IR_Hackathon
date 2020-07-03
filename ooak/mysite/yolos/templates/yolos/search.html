@@ -1,5 +1,17 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
+{% block css %}
+<style>
+  #card-result {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Black Han Sans', sans-serif;
+  }
+
+</style>
+
+{% endblock %}
 
 {% block body %}
 {% load static %}
@@ -20,50 +32,53 @@
 <div id="result"></div> -->
 
 <div class="row" style="">
-  <div class="" style="">
-    <div class="card">
-      <img src="{% static 'yolos/images/aa.png' %}" alt="" id="imgSrc" class="card-img-top">
-      <div class="card-body">
-        <h5 class="card-title" id="name">신발 검색</h5>
+  <div class="col-6" style="height: 500px;">
+    <div class="card"  style="height: 500px;" >
+      <div  style="height: 500px;"class="card-body d-flex justify-content-center d-flex align-itmes-center justify-content-center flex-column">
+        <h3 class="card-title text-center" id="name">신발 검색</h3>
+        <hr class="mb-5 border border-primary" style="width: 5rem;">
         <p class="card-text" id="per">
           <ol>
             <li>이름을 알고 싶은 신발 사진을 업로드</li>
             <li>확인 버튼을 누르면 끝</li>
           </ol>
         </p>
-        <div>
-          <p>원하는 사진을 선택해 주세요.</p>
-          <input type="file" id="file" name="file">
-          <input type=submit value=Upload id="upload">
-          <p>신발 확인하기</p>
-          <input type=submit value="확인" id="yolo" class="btn btn-primary">
+        <div class="text-center">
+          <p class="text-center">원하는 사진을 선택해 주세요.</p>
+          <input type="file" id="fileupload" name="file" accept="image/*">
+          <!-- <p>신발 확인하기</p> -->
         </div>
       </div>
     </div>
   </div>
-
+<div class="col-6" style="max-height: 500px; line-height: 500px;">
+  <img src="{% static 'yolos/images/aa.png' %}" alt="" id="imgSrc" class="card-img-top">
+</div>
+</div>
+<div class="my-5 text-center">
+  <input type=submit value="결과 확인" id="yolo" class="btn btn-primary btn-lg">
+</div>
   <div class="">
 
     <div class="card" style="display: none;" id="resultCard">
       <div class="row no-gutters">
-        <div class="col-md-8">
+        <div class="col-md-6 d-flex justify-content-center d-flex align-itmes-center justify-content-center flex-column">
           <div id="result-image-div" style="position: relative;">
             <img src="{% static 'yolos/images/aa.png' %}" alt="" id="resultImg" class="">
             <div class="label"></div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="card-body" id="card-result">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        <div class="col-md-6" id="card-result">
+          <div class="card-body">
+            <!-- <h5 class="card-title">Card title</h5> -->
+            <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+            <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
             <div id="result"></div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
 <a href="{% url 'yolos:index' %}">[BACK]</a>
 
