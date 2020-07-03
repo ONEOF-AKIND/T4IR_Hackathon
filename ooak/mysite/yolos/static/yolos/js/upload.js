@@ -1,6 +1,7 @@
-const uploadButton = document.querySelector('#upload')
-    uploadButton.addEventListener('click', function(event) {
-        const imagefile = document.querySelector('#file')
+const uploadButton = document.querySelector('#fileupload')
+    uploadButton.addEventListener('change', function(event) {
+        console.log(event)
+        const imagefile = document.querySelector('#fileupload')
         const formData = new FormData();
         formData.append("image", imagefile.files[0]);
         axios.defaults.xsrfCookieName = 'csrftoken';
@@ -14,6 +15,7 @@ const uploadButton = document.querySelector('#upload')
             console.log(response)
             const imgTag = document.querySelector('#imgSrc')
             imgTag.src = response.data.img_url
+            imgTag.style.height = '500px'
         })
         .catch(error => console.log(error))
     })
@@ -41,10 +43,10 @@ const searchButton = document.querySelector('#yolo')
                 // const resultLabel = document.querySelector('.label')
                 const div = document.createElement('div')
                 const textDiv = document.createElement('div')
-                textDiv.className = 'text'
+                textDiv.className = 'result-box'
                 textDiv.innerHTML = `
-                <h1>${result.label}인듯</h1>
-                <h2>${result.confidence*100}%!!!!</h2>
+                <h1 class="result-text">${result.label}</h1>
+                <h2 class="result-percent">${result.confidence*100}%</h2>
                 `
                 const x = result.bottomright.x - result.topleft.x
                 const y = result.bottomright.y - result.topleft.y

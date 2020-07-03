@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'mains',
     'imagekit',
     'yolos',
     'bootstrap4',
