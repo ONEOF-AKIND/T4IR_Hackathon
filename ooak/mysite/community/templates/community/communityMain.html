@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block body %}
+  <div class="container">
+    <h1>community 페이지</h1> 
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>번호</th>
+          <th>제목</th>
+          <th>작성자</th>
+          <th>작성일</th>
+          <th>조회수</th>
+          <th>좋아요</th>
+        </tr>
+      </thead>  
+      <tbody>
+        {% for article in articles %}
+        <tr>
+          <td scope="row">{{article.pk}}</td>
+          <td><a href="{% url 'community:detail' article.pk %}">{{article.title}}</a>
+          [{{article.comment_set.all|length}}]
+          </td>
+          <td>{{ article.user }}</td>
+          <td>{{article.created_at}}</td>
+          <td>{{ article.hits }}</td>
+          <td>{{ article.like_users.count }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <hr/>
+    <a class="btn btn-primary pull-left" href="{% url 'community:create' %}">글쓰기</a>
+  </div> 
+{% endblock %}
