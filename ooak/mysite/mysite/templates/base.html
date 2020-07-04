@@ -1,28 +1,72 @@
 {% load bootstrap4 %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://kit.fontawesome.com/fd5cc6fe1b.js" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/568bce6e29.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');    </style>
-  <style>
-    body {
-      font-family: 'Noto Sans KR', sans-serif !important;
-    }
-  </style>
+
   {% bootstrap_css %}
-  {% block css %}
-  {% endblock %}
+
   <title>Document</title>
+  
+  
+  <link rel="stylesheet" href="{% static 'accounts/css/common.css' %}">
+  <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'accounts/css/login.css' %}">
+  <link rel="shortcut icon" href="{% static 'accounts/imgs/ooak1.png' %}">
+
 </head>
 <body>
-  <div class="container">
-    {% block body %}
-    {% endblock %}
-  </div>
+  <!-- 최상단  -->
+
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="{% url 'community:index' %}">OOAK</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+      {% if user.is_authenticated %}
+      <a class="navbar-brand" href="{% url 'accounts:profile' user.username %}">{{ user.username }}</a>
+      <li class="nav-item ">
+        <a class="nav-link" href="{% url 'accounts:logout' %}">logout</a>
+      </li>
+      {% else %}
+      <li class="nav-item ">
+        <a class="nav-link" href="{% url 'accounts:login' %}">login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'accounts:signup' %}">join</a>
+      </li>
+      {% endif %}
+     
+  </nav>
+  <!-- 메뉴 -->
+  <nav class="navbar" style="background-color: #e3f2fd;">
+    <nav class="nav nav-pills flex-column flex-sm-row">
+      <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'community:communityMain' %}">Community</a>
+      <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'colorizes:index' %}">Customizing</a>
+      <a class="flex-sm-fill text-sm-center nav-link" href="{% url 'yolos:search' %}">YoLo</a>  
+    </nav>
+  </nav>
+  <hr>
+  {% block body %}
+  {% endblock %}
+
+  {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}">
+      {{ message.message }}
+    </div>
+  {% endfor %}
+  {% endif %}   
+
   {% bootstrap_javascript jquery='full' %}
 </body>
 </html>
