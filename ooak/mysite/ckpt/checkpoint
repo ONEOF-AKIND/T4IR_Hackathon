@@ -1,0 +1,6 @@
+model_checkpoint_path: "my-tiny-yolo-29820"
+all_model_checkpoint_paths: "my-tiny-yolo-29780"
+all_model_checkpoint_paths: "my-tiny-yolo-29790"
+all_model_checkpoint_paths: "my-tiny-yolo-29800"
+all_model_checkpoint_paths: "my-tiny-yolo-29810"
+all_model_checkpoint_paths: "my-tiny-yolo-29820"

@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('yolos/', include('yolos.urls')),
     path('mains/', include('mains.urls')),
+    path('colorize/', include('colorize.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
