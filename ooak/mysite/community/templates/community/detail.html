@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+
+{% block body %}
+<div class="container">
+  <h1>상세 페이지</h1>
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <th>제목</th>
+          <td colspan="16">{{ article.title }}</td>
+      </tr>
+      <tr>
+        <th>작성자</th>
+          <td colspan="6">{{ article.user }}</td>
+        <th>작성일</th>
+            <td colspan="2">{{ article.created_at }}</td>
+        <th>조회</th>
+          <td colspan="2">{{ article.hits }}</td>
+        <th>추천</th>
+          <td colspan="2">{{ article.like_users.count }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <table class="table table-borderless">
+    <tbody>
+      <p>{{ article.content }}</p>
+      {% if article.image %}
+      <p><img src="{{ article.image.url }}" alt="{{ article.image }}"></p> 
+      {% endif %}
+    </tbody>
+  </table>
+{% include 'community/_like.html' %}
+<ul>
+  {% for comment in comments %}
+    <table class="table table-striped">
+        <tbody>
+          <tr>
+            <td>{{ comment.user.username }}</td>
+            <td class="text-right">{{ comment.created_at }}</td>
+          </tr>
+          <tr>
+            <td>{{ comment.content }}</td>
+          </tr>
+        </tbody>     
+    </table>
+    {% if request.user == comment.user %}
+      <form action="{% url 'community:comment_delete' article.pk comment.pk %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="댓글 삭제" class="btn btn-outline-light">
+      </form>
+    {% endif %}
+
+  {% empty %}
+    <p>댓글이 없습니다.</p>  
+  {% endfor %}
+</ul>
+<hr>
+{% if user.is_authenticated %}
+  <form action="{% url 'community:comment_create' article.pk %}" method="POST">
+    {% csrf_token %}
+    {{ comment_form }}
+    <input type="submit" value="댓글생성" class="btn btn-outline-primary">
+  </form>
+{% else %}
+  <a href="{% url 'accounts:login' %}">[댓글을 작성하시려면 로그인을 해 주세요.]</a>
+{% endif %}
+<hr>
+{% if request.user == article.user %}
+  <a class="btn btn-primary" href="{% url 'community:communityMain' %}">목록</a>
+  <a class="btn btn-primary" href="{% url 'community:update' article.pk %}">수정하기</a>
+  <form action="{% url 'community:delete' article.pk %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="DELETE" class="btn btn-outline-light">
+  </form>
+{% else %}
+  <a href="{% url 'community:index' %}">[back]</a>
+{% endif %}
+
+</div> 
+<script src="{% static 'articles/js/like.js' %}"></script>
+{% endblock %}
