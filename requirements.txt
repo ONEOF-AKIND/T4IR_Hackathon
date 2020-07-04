@@ -8,7 +8,6 @@ bleach==3.1.5
 colorama==0.4.3
 cycler==0.10.0
 Cython==0.29.20
-darkflow @ file:///C:/iot/T4IR_Hackathon/ooak/mysite/yolos/darkflow
 data==0.4
 decorator==4.4.2
 defusedxml==0.6.0
