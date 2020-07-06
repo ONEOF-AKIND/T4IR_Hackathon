@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from data import colorize_image as CI
 from skimage import color
 from data import lab_gamut as lab
+import cv2
 
 # Create your views here.
 def index(request):
@@ -53,6 +54,9 @@ def colorize(request):
     search2 = Search2()
     img2 = Search2.objects.all().last()
     
+   
+
+
     import os
     from django.conf import settings
     print(os.getenv('PYTHONPATH'))
@@ -96,7 +100,7 @@ def colorize(request):
     plt.imshow(img_pred_withref_fullres)
     plt.title('greisekkiya!')
     plt.axis('off')
-    plt.savefig('./colorize/static/colorize/images/result.jpg')
+    plt.savefig('./colorize/static/colorize/images/result1.jpg')
     
    
 

@@ -12,13 +12,13 @@ from .forms import CustomUserChangeForm, CustomUserCreationForm
 # Create your views here.
 def signup(request):
     if request.user.is_authenticated:
-        return redirect('community:index')
+        return redirect('community:communityMain')
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
-            return redirect('community:index')
+            return redirect('community:communityMain')
     else:
         form = CustomUserCreationForm()
     context = {
@@ -33,7 +33,7 @@ def login(request):
         form = AuthenticationForm(request, request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
-            return redirect(request.GET.get('next') or 'community:index')
+            return redirect(request.GET.get('next') or 'community:communityMain')
     else:
         form = AuthenticationForm()
     context = {
@@ -43,19 +43,19 @@ def login(request):
 
 def logout(request):
     auth_logout(request)
-    return redirect('community:index')
+    return redirect('community:communityMain')
 
 @require_POST
 def delete(request):
     request.user.delete()
-    return redirect('community:index')
+    return redirect('community:communityMain')
 
 def update(request):
     if request.method == "POST":
         form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             user = form.save()
-            return redirect('community:index')
+            return redirect('community:communityMain')
     else:
         form = CustomUserChangeForm(instance=request.user)
     context = {
@@ -69,7 +69,7 @@ def change_password(request):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
-            return redirect('community:index')
+            return redirect('community:communityMain')
     else:
         form = PasswordChangeForm(request.user)
     context = {

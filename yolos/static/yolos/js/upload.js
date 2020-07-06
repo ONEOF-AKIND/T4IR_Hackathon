@@ -39,6 +39,7 @@ const searchButton = document.querySelector('#yolo')
             // `
             document.querySelectorAll('.label').forEach( label => label.remove())
             document.querySelectorAll('.text').forEach( text => text.remove())
+            document.querySelectorAll('.result-box').forEach(result => {result.remove()})
             results.forEach(function(result){
                 // const resultLabel = document.querySelector('.label')
                 const div = document.createElement('div')

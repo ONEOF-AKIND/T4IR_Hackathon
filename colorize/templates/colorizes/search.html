@@ -1,36 +1,48 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load bootstrap4 %}
+{% block css %}
+<style>
+  #card-result {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Black Han Sans', sans-serif;
+  }
+</style>
+{% endblock %}
 {% block body %}
 
 <div class="row" style="">
-    <div class="" style="">
-      <div class="card">
-        <img src="{% static 'yolos/images/aa.png' %}" alt="" id="shoes-img" class="card-img-top" width="200" height="400">
-        <div class="card-body">
-          <h5 class="card-title" id="name">Customizing</h5>
-          <p class="card-text" id="per">
-            <ol>
-              <li>색을 바꾸고 싶은 신발 사진을 업로드</li>
-          
-            </ol>
-          </p>
-          <div>
-            <p>원하는 사진을 선택해 주세요.</p>
-            <form action="">
-              {% csrf_token %}
-              <input type="file" id="file" name="file">
-              <input type=submit value=Upload id="upload">
-            </form>
-              
-          </div>
+  <div class="col-6" style="height: 500px;">
+    <div class="card"  style="height: 500px;" >
+      <div  style="height: 550px;"class="card-body d-flex justify-content-center d-flex align-itmes-center justify-content-center flex-column p-0">
+        <img src="{% static 'colorize/images/noimage.jpeg' %}" alt="" id="shoes-img" class="card-img-top" width="200" height="400">
+        <!-- <h3 class="card-title text-center" id="name">Customizing</h3> -->
+        <!-- <hr class="mb-5 border border-primary m-0" style="width: 5rem;"> -->
+      <div class="card-body">
+        <p class="card-text" id="per">
+          <ol>
+            <li>색을 바꾸고 싶은 신발 사진을 업로드</li>     
+          </ol>
+        </p>
+        <div>
+          <p>원하는 사진을 선택해 주세요.</p>
+          <form action="">
+            {% csrf_token %}
+            <input type="file" id="file" name="file">
+            <input type=submit value=Upload id="upload">
+          </form>
+            
         </div>
       </div>
+      </div>
     </div>
+  </div>
 
     <div class="" style="">
       <div class="card">
-        <img src="{% static 'yolos/images/aa.png' %}" alt="" id="shape" class="card-img-top">
+        <img src="{% static 'colorize/images/noimage.jpeg' %}" alt="" id="shape" class="card-img-top" width="200" height="400">
         <div class="card-body">
           <h5 class="card-title" id="name">신발 검색</h5>
           <p class="card-text" id="per">
@@ -55,14 +67,15 @@
         <div class="row no-gutters">
           <div class="col-md-8">
             <div id="result-image-div" style="position: relative;">
-              <img src="{% static 'yolos/images/aa.png' %}" alt="" id="resultImg" class="">
+              <img src="{% static 'colorize/images/result1.jpg' %}" alt="" id="resultImg" class="">
               <div class="label"></div>
             </div>
           </div>
           <div class="col-md-4">
             <div class="card-body" id="card-result">
-              <h5 class="card-title">Card title</h5>
-                <img src="{% static 'colorize/images/result.jpg' %}" alt="" id="shape" class="card-img-top">  
+              <h5 class="card-title"></h5>
+                <!-- <img src="{% static 'colorize/images/result.jpg' %}" alt="" id="shape" class="card-img-top">   -->
+                <a href="{% url 'colorizes:colorize' %}" class="btn btn-primary btn-lg">Do Customize !!!!</a>
               <div id="result"></div>
             </div>
           </div>
@@ -71,6 +84,6 @@
     </div>
   </div>
  
-  <a href="{% url 'colorizes:colorize' %}">Do Customize !!!!</a>
+
   <script src="{% static 'colorize/js/upload.js' %}"></script>
 {% endblock %}
